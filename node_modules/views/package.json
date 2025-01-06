@@ -1,0 +1,38 @@
+{
+  "name": "views",
+  "version": "1.0.2",
+  "description": "Views registry and rendering",
+  "main": "views.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cpsubrian/node-views.git"
+  },
+  "dependencies": {
+    "async": "~0.2.6",
+    "consolidate": "~0.8.0",
+    "glob": "~3.1.21",
+    "clone": "~0.1.6",
+    "tea-merge": "~0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.2",
+    "handlebars": "~1.0.10",
+    "benchmarx": "~0.2.5",
+    "middler": "~0.6.1",
+    "request": "~2.16.0"
+  },
+  "keywords": [
+    "views",
+    "templates",
+    "render",
+    "partials"
+  ],
+  "author": "Brian Link",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.8.0"
+  }
+}
