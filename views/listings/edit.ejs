@@ -1,7 +1,8 @@
 <% layout("/layouts/boilerplate") %>
     <div class="row">
         <div class="col-8 offset-2 mt-2">
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation"
+                enctype="multipart/form-data" novalidate>
                 <div>
                     <h3>Edit Your Listing</h3>
                     <label for="title" class="form-label">Title</label>
@@ -24,10 +25,14 @@
                         A valid description.
                     </div>
                 </div>
+                <div class="mt-2 mb-2">
+                    <b>Original Listing Image</b>
+                    <img src="<%= originalImageUrl %>" class="card-img-top card-img" style="height: 20rem;"
+                    alt="This is the listing image">
+                </div>
                 <div>
-                    <label for="image" class="form-label">Image</label>
-                    <input type="url" name="listing[image]" class="form-control" placeholder="Enter Image"
-                        value="<%= listing.image.url %>" required>
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input type="file" name="listing[image]" class="form-control" required>
                     <div class="invalid-feedback">
                         Please select a valid image.
                     </div>
@@ -44,7 +49,7 @@
                             Please valid price.
                         </div>
                         <div class="valid-feedback">
-                         A valid price.
+                            A valid price.
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -55,7 +60,7 @@
                             Please provide a valid country.
                         </div>
                         <div class="valid-feedback">
-                           A valid country
+                            A valid country
                         </div>
                     </div>
                 </div>

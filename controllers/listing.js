@@ -32,14 +32,11 @@ module.exports.newRoute = async (req, res) => {
 
 // Create Listing
 module.exports.createListing = async (req, res) => {
-    console.log("Request Body:", req.body); // Debugging statement
-    if (!req.body.listing) {
-        console.error("Listing data is missing in the request body");
-        req.flash("error", "Listing data is missing");
-        return res.redirect("/listings/new");
-    }
+    let url = req.file.path;
+    let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
+    newListing.image = { url, filename };
     await newListing.save();
     req.flash("success", "Successfully New Listing Created!");
     res.redirect("/listings");
@@ -53,18 +50,21 @@ module.exports.editRoute = async (req, res) => {
         req.flash("error", "The listing Does Not Exit!");
         res.redirect("/listings");
     }
-    res.render("listings/edit.ejs", { listing });
+    let originalImageUrl = listing.image.url;
+    originalImageUrl.replace("/upload", "/upload/ar_1.0,c_fill,h_250/bo_5px_solid_lightblue");
+    res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
 //Update Route
 module.exports.updateRoute = async (req, res) => {
     let { id } = req.params;
-    let listing = Listing.findById(id);
-    if (!listing.owner.equals(req.locals.curUser)) {
-        req.flash("error", "You don't have permission to edit");
-        return res.redirect(`/lisitngs/${id}`);
+    let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+        listing.image = { url, filename };
+        await listing.save();
     };
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     req.flash("success", "Successfully Edit Listing");
     res.redirect(`/listings/${id}`);
 };

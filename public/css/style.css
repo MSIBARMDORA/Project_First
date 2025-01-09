@@ -8,6 +8,7 @@ body {
 
 .coutainer {
     flex: 1;
+    margin:0 1.5rem 0 1.5rem;
 }
 
 .navbar {
@@ -112,5 +113,24 @@ body {
 
 .body {
     border: 1px solid black;
-        
+
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    width: 443px;
+    height: 496px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    width: 443px;
+    height: 496px;
+}
+
+.gmap_iframe {
+    width: 443px !important;
+    height: 496px !important;
 }

@@ -6,7 +6,7 @@ const Review = require("./models/review.js");
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.redirectUrl = req.originalUrl;
-        req.flash("error", "You must be login to create listing!");
+        req.flash("error", "You must be login!");
         return res.redirect("/login");
     }
     next();
@@ -16,16 +16,6 @@ module.exports.saveRedirectUrl = (req, res, next) => {
     if (req.session.redirectUrl) {
         return res.locals.redirect = req.session.redirectUrl;
     };
-    next();
-};
-
-module.exports.isOwne = async (req, res, next) => {
-    let { id } = req.params;
-    let listing = Listing.findById(id);
-    if (!listing.owner.equals(req.locals.curUser)) {
-        req.flash("error", "You not the owner of this lisitng");
-        return res.redirect(`/lisitngs/${id}`);
-    }
     next();
 };
 
@@ -65,8 +55,8 @@ module.exports.reviewValidation = (req, res, next) => {
 //Review Destory Author
 module.exports.reviewAuthor = async (req, res, next) => {
     let { id, reviewId } = req.params;
-    let review = Review.findById(reviewId);
-    if (!review.author.equals(res.locals.curUser._id)) {
+    let review = await Review.findById(reviewId);
+    if (!review.author.equals(req.user._id)) {
         req.flash("error", "You are not author of this review");
         return res.redirect(`/listings/${id}`);
     }

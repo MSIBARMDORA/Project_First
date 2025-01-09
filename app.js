@@ -18,15 +18,42 @@ const userRoutes = require("./Routes/user.js");
 const Listing = require("./models/listing.js");
 const { isOwner } = require("./middleware.js");
 const Review = require("./models/review.js");
+const dbUrl = process.env.ATLASDB_URL;
+const MongoStore = require('connect-mongo');
+
+// Replace with your actual MongoDB connection string
+
+mongoose.connect(dbUrl)
+  .then(() => {
+    console.log('MongoDB connection');
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+  });
+
 
 // Set up EJS as the templating engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 
+//Mongoosh 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", (err) => {
+  console.log("Session Store Error", err);
+});
+
 //Middleware Variable
 const sessionOption = {
-  secret: "mysupresecret",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -35,7 +62,6 @@ const sessionOption = {
     httpOnly: true
   }
 };
-
 
 // Middleware for parsing JSON and URL-encoded bodies
 app.use(express.json());
@@ -74,12 +100,6 @@ app.use((req, res, next) => {
 //   res.send(register);
 // });
 
-
-// Mongoose connection
-mongoose
-  .connect("mongodb://127.0.0.1:27017/Traveling")
-  .then(() => console.log("Connected to MongoDB!"))
-  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
 app.use("/listings", listingsRoutes);
