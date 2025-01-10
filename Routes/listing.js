@@ -2,8 +2,6 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 };
 
-console.log(process.env.SECRET);
-
 const express = require("express");
 const router = express.Router();
 const listingControllers = require("../controllers/listing.js");
@@ -19,7 +17,7 @@ const upuload = multer({ storage });
 router
     .route("/")
     .get(wrapAsync(listingControllers.indexRoute))
-    .post(isLoggedIn,  upuload.single("listing[image]"), wrapAsync(listingControllers.createListing));
+    .post(isLoggedIn, upuload.single("listing[image]"), wrapAsync(listingControllers.createListing));
 
 router.get("/new", isLoggedIn, wrapAsync(listingControllers.newRoute));
 
@@ -32,7 +30,7 @@ router.get("/:id/edit", isLoggedIn, wrapAsync(listingControllers.editRoute));
 router
     .route("/:id")
     .get(wrapAsync(listingControllers.showRoute))
-    .put(isOwner,upuload.single("listing[image]"), wrapAsync(listingControllers.updateRoute))
+    .put(isOwner, upuload.single("listing[image]"), wrapAsync(listingControllers.updateRoute))
     .delete(isLoggedIn, isOwner, wrapAsync(listingControllers.deleteRoute));
 
 module.exports = router;
