@@ -1,0 +1,172 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* font-family: "Plus Jakarta Sans", serif !important; */
+    /* font-optical-sizing: auto !important; */
+}
+
+.coutainer {
+    flex: 1;
+    margin: 0 1.5rem 0 1.5rem;
+}
+
+.navbar {
+    height: 5rem !important;
+    background-color: white !important;
+}
+
+.fa-compass {
+    color: #fe424d !important;
+    font-size: 2rem;
+}
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links:hover a {
+    text-decoration: underline;
+}
+
+.f-info-links {
+    width: 100%;
+}
+
+.f-info-socials {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info {
+    text-align: center;
+    display: flex;
+    height: 6rem;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-body p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none !important;
+    color: black;
+}
+
+.card-img {
+    opacity: 1;
+}
+
+.card-img:hover {
+    opacity: 0.7;
+}
+
+.mg-3 {
+    margin: 0 0.2rem 0 0.2rem !important;
+}
+
+/* button */
+.btn-red {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* button */
+.bt-b {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.body {
+    border: 1px solid black;
+
+}
+
+.mapouter {
+    position: relative;
+    text-align: right;
+    width: 443px;
+    height: 496px;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    width: 443px;
+    height: 496px;
+}
+
+.gmap_iframe {
+    width: 443px !important;
+    height: 496px !important;
+}
+
+/* index.ejs */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0.2rem 1rem 0.1rem 1rem;
+}
+
+.filter {
+    text-align: center;
+    margin-top: 1rem;
+    margin-right: 38px;
+    opacity: 0.7;
+    font-size: 0.7rem;
+    align-items: center;
+}
+
+.filter:hover {
+    opacity: 1;
+}
+
+.tax-info {
+    display: none;
+}
+
+.tax-togle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 2rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
